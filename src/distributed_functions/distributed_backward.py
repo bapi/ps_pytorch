@@ -3,7 +3,7 @@ import warnings
 
 from torch.autograd import Variable
 from torch.autograd.function import Function, NestedIOFunction
-from torch.autograd.stochastic_function import StochasticFunction
+# from torch.autograd.stochastic_function import StochasticFunction
 from torch.autograd.gradcheck import gradcheck
 
 
