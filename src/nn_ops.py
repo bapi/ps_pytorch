@@ -81,7 +81,7 @@ class NN_Trainer(object):
                 # load the training info
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}  Prec@1: {}  Prec@5: {}  Time Cost: {}'.format(
                     i, batch_idx * len(data), len(train_loader.dataset),
-                    100. * batch_idx / len(train_loader), loss.data[0], 
+                    100. * batch_idx / len(train_loader), loss.data[0].item(), 
                     prec1.numpy()[0], 
                     prec5.numpy()[0], time.time()-iter_start_time))
             # we evaluate the model performance on end of each epoch
@@ -95,7 +95,7 @@ class NN_Trainer(object):
         for data, y_batch in test_loader:
             data, target = Variable(data, volatile=True), Variable(y_batch)
             output = self.network(data)
-            test_loss += F.nll_loss(output, target, size_average=False).data[0] # sum up batch loss
+            test_loss += F.nll_loss(output, target, size_average=False).data[0].item() # sum up batch loss
             prec1_tmp, prec5_tmp = accuracy(output.data, y_batch, topk=(1, 5))
             prec1_counter_ += prec1_tmp.numpy()[0]
             prec5_counter_ += prec5_tmp.numpy()[0]
